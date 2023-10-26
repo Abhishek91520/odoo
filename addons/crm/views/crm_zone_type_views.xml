@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_zone_type_search" model="ir.ui.view">
+        <field name="name">Zone Type - Search</field>
+        <field name="model">crm.zone.type</field>
+        <field name="arch" type="xml">
+            <search string="zone Type Search">
+                <field name="zone_type"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- STAGES TREE VIEW + MUTI_EDIT -->
+    <record id="crm_zone_type_tree" model="ir.ui.view">
+        <field name="name">crm.stage.tree</field>
+        <field name="model">crm.zone.type</field>
+        <field name="arch" type="xml">
+            <tree string="zone Type" multi_edit="1">
+                <field name="zone_type" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="zone_type_action" model="ir.actions.act_window">
+        <field name="name">Zonetype</field>
+        <field name="res_model">crm.zone.type</field>
+        <field name="view_id" ref="crm.crm_zone_type_tree"/>
+    </record>
+
+
+</odoo>

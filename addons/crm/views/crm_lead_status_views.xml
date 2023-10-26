@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_lead_status_search" model="ir.ui.view">
+        <field name="name">Stage - Search</field>
+        <field name="model">crm.lead.status</field>
+        <field name="arch" type="xml">
+            <search string="Stage Search">
+                <field name="name"/>
+                <field name="sequence"/>
+                <field name="is_default"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- STAGES TREE VIEW + MUTI_EDIT -->
+    <record id="crm_lead_status_tree" model="ir.ui.view">
+        <field name="name">crm.stage.tree</field>
+        <field name="model">crm.lead.status</field>
+        <field name="arch" type="xml">
+            <tree string="Stages" multi_edit="1">
+                <field name="sequence" widget="handle"/>
+                <field name="name" readonly="1"/>
+                <field name="is_default"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="lead_status_action" model="ir.actions.act_window">
+        <field name="name">LeadSatus</field>
+        <field name="res_model">crm.lead.status</field>
+        <field name="view_id" ref="crm.crm_lead_status_tree"/>
+        <field name="help" type="html">
+          <p class="o_view_nocontent_smiling_face">
+            Set a new stage in your opportunity pipeline
+          </p><p>
+            Stages allow salespersons to easily track how a specific opportunity
+            is positioned in the sales cycle.
+          </p>
+        </field>
+    </record>
+
+
+</odoo>

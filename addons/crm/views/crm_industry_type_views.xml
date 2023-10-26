@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="crm_industry_type_search" model="ir.ui.view">
+        <field name="name">Industry Type - Search</field>
+        <field name="model">crm.industry.type</field>
+        <field name="arch" type="xml">
+            <search string="Industry Type Search">
+                <field name="industry_type"/>
+            </search>
+        </field>
+    </record>
+    <record id="crm_industry_type_tree" model="ir.ui.view">
+        <field name="name">crm.stage.tree</field>
+        <field name="model">crm.industry.type</field>
+        <field name="arch" type="xml">
+            <tree string="Industry Type" multi_edit="1">
+                <field name="industry_type" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+    <record id="industry_type_action" model="ir.actions.act_window">
+        <field name="name">Industry Type</field>
+        <field name="res_model">crm.industry.type</field>
+        <field name="view_id" ref="crm.crm_industry_type_tree"/>
+    </record>
+</odoo>

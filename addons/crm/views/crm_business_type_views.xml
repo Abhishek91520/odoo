@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="crm_business_type_search" model="ir.ui.view">
+        <field name="name">Business Type - Search</field>
+        <field name="model">crm.business.type</field>
+        <field name="arch" type="xml">
+            <search string="Business Type Search">
+                <field name="business_type"/>
+            </search>
+        </field>
+    </record>
+
+    <!-- STAGES TREE VIEW + MUTI_EDIT -->
+    <record id="crm_business_type_tree" model="ir.ui.view">
+        <field name="name">crm.stage.tree</field>
+        <field name="model">crm.business.type</field>
+        <field name="arch" type="xml">
+            <tree string="Business Type" multi_edit="1">
+                <field name="business_type" readonly="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="business_type_action" model="ir.actions.act_window">
+        <field name="name">BusinessType</field>
+        <field name="res_model">crm.business.type</field>
+        <field name="view_id" ref="crm.crm_business_type_tree"/>
+    </record>
+
+
+</odoo>
