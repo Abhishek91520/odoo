@@ -1556,7 +1556,6 @@ class PurchaseOrderLine(models.Model):
                 'company_id': line.company_id.id,
             })
 
-
 class OrderForm(models.Model):
     _inherit = 'purchase.order'
     attn = fields.Char()

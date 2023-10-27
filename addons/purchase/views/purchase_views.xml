@@ -404,7 +404,6 @@
                                 <field name="payment_terms" string="Payment Terms" />
                                 <field name="delivery_date" string="Delivery Date" />
                                 <field name="remarks" string="Remarks" />
-
                             </group>
                             </group>
                         </page>
