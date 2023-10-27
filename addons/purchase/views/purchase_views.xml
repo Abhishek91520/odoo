@@ -387,6 +387,27 @@
                                 </group>
                             </group>
                         </page>
+                        <page string="Order Form" name="order_form">
+                            <group>
+                            <group>
+                                <field name="attn" string="Attn. (from Principal)" />
+                                <field name="soldto" string="Sold To" />
+                                <field name="consignee" string="Consignee" />
+                                <field name="notify" string="Notify" />
+                                <field name="insurance" string="Insurance" />
+                                <field name="port_of_dest" string="Port Of Destination" />
+                                <field name="terms" string="Terms (Incoterms)" />
+                                <field name="spl_instruction" string="Spacial Instruction" />
+                                <field name="docs_req" string="Documents Required" />
+                                <field name="docsformillenia" string="Documents for Millenia" />
+                                <field name="docsforcustomer" string="Documents for Customer" />
+                                <field name="payment_terms" string="Payment Terms" />
+                                <field name="delivery_date" string="Delivery Date" />
+                                <field name="remarks" string="Remarks" />
+
+                            </group>
+                            </group>
+                        </page>
                     </notebook>
                 </sheet>
                 <div class="oe_chatter">
