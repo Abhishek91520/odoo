@@ -389,6 +389,7 @@
                         </page>
                         <page string="Order Form" name="order_form">
                             <group>
+
                             <group>
                                 <field name="attn" string="Attn. (from Principal)" />
                                 <field name="soldto" string="Sold To" />

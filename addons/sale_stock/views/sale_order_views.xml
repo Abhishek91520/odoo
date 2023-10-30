@@ -30,6 +30,7 @@
                     <attribute name="attrs">
                         {'invisible': [('effective_date', '!=', False), ('commitment_date', '!=', False)]}
                     </attribute>
+
                 </xpath>
                 <xpath expr="//div[@name='commitment_date_div']" position="replace">
                     <div class="o_row">

@@ -69,6 +69,7 @@ class CrmPolitics(models.Model):
     tech_discussion = fields.Text('Technical Discussion Evaluator')
     offer_discount = fields.Boolean('Offer Discount in Detail')
 
+
 class DemoDetails(models.Model):
     _inherit = 'crm.lead'
     sequence = fields.Integer("Sequence")

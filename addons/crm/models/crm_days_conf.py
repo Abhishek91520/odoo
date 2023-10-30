@@ -16,6 +16,7 @@ class CRMLead(models.Model):
         str_query = '''UPDATE crm_lead SET active=False where date_last_stage_update <='{}' '''
         self.env.cr.execute(str_query.format(date_threshold))
 
+
         # Move the leads to the 'Lost' stage and set the lost reason
 
 class CRMConfiguration(models.TransientModel):

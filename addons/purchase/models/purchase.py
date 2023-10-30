@@ -1548,6 +1548,7 @@ class PurchaseOrderLine(models.Model):
                 subtype_id=self.env.ref('mail.mt_note').id
             )
 
+
     def _validate_analytic_distribution(self):
         for line in self.filtered(lambda l: not l.display_type):
             line._validate_distribution(**{
