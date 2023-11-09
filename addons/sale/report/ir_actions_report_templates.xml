@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 <template id="report_saleorder_document">
+
     <t t-call="web.external_layout">
         <t t-set="doc" t-value="doc.with_context(lang=doc.partner_id.lang)" />
         <t t-set="forced_vat" t-value="doc.fiscal_position_id.foreign_vat"/> <!-- So that it appears in the footer of the report instead of the company VAT if it's set -->
-        <t t-set="address">
-            <div t-field="doc.partner_id"
-                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
-            <p t-if="doc.partner_id.vat"><t t-out="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>
-        </t>
+<!--        <t t-set="address">-->
+<!--            <div t-field="doc.partner_id" class="text-start"-->
+<!--                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />-->
+<!--            <p t-if="doc.partner_id.vat"><t t-out="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>-->
+<!--        </t>-->
         <t t-if="doc.partner_shipping_id == doc.partner_invoice_id
                              and doc.partner_invoice_id != doc.partner_id
                              or doc.partner_shipping_id != doc.partner_invoice_id">
@@ -31,7 +32,11 @@
             </t>
         </t>
         <div class="page">
+
             <div class="oe_structure"/>
+                        <div t-field="doc.partner_id" class="row col-12 text-start"
+                t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}' />
+            <p t-if="doc.partner_id.vat"><t t-out="doc.company_id.account_fiscal_country_id.vat_label or 'Tax ID'"/>: <span t-field="doc.partner_id.vat"/></p>
 
             <h2 class="mt-4">
                 <span t-if="env.context.get('proforma', False) or is_pro_forma">Pro-Forma Invoice # </span>
@@ -70,13 +75,14 @@
                 <!-- In case we want to repeat the header, remove "display: table-row-group" -->
                 <thead style="display: table-row-group">
                     <tr>
+                        <th name="th_srno" class="text-start">Sr No</th>
                         <th name="th_description" class="text-start">Description</th>
                         <th name="th_quantity" class="text-end">Quantity</th>
                         <th name="th_priceunit" class="text-end">Unit Price</th>
                         <th name="th_discount" t-if="display_discount" class="text-end" groups="product.group_discount_per_so_line">
                             <span>Disc.%</span>
                         </th>
-                        <th name="th_taxes" class="text-end">Taxes</th>
+<!--                        <th name="th_taxes" class="text-end">Taxes</th>-->
                         <th name="th_subtotal" class="text-end">
                             <span groups="account.group_show_line_subtotals_tax_excluded">Amount</span>
                             <span groups="account.group_show_line_subtotals_tax_included">Total Price</span>
@@ -86,15 +92,17 @@
                 <tbody class="sale_tbody">
 
                     <t t-set="current_subtotal" t-value="0"/>
-
-                    <t t-foreach="lines_to_report" t-as="line">
+                    <t t-set="i" t-value="1"/>
+                    <t t-foreach="lines_to_report" t-as="line" >
 
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                         <t t-set="current_subtotal" t-value="current_subtotal + line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
 
                         <tr t-att-class="'bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'fst-italic o_line_note' if line.display_type == 'line_note' else ''">
                             <t t-if="not line.display_type">
-                                <td name="td_name"><span t-field="line.name"/></td>
+                                <td name="sr_no"><span t-esc="i"/></td>
+                                <t t-set="i" t-value="i+1"/>
+                                <td name="td_name"><span t-field="line.name" /></td>
                                 <td name="td_quantity" class="text-end">
                                     <span t-field="line.product_uom_qty"/>
                                     <span t-field="line.product_uom"/>
@@ -105,9 +113,9 @@
                                 <td t-if="display_discount" class="text-end" groups="product.group_discount_per_so_line">
                                     <span t-field="line.discount"/>
                                 </td>
-                                <td name="td_taxes" class="text-end">
-                                    <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>
-                                </td>
+<!--                                <td name="td_taxes" class="text-end">-->
+<!--                                    <span t-out="', '.join(map(lambda x: (x.description or x.name), line.tax_id))"/>-->
+<!--                                </td>-->
                                 <td t-if="not line.is_downpayment" name="td_subtotal" class="text-end o_price_total">
                                     <span t-field="line.price_subtotal" groups="account.group_show_line_subtotals_tax_excluded"/>
                                     <span t-field="line.price_total" groups="account.group_show_line_subtotals_tax_included"/>
