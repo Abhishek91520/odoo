@@ -71,6 +71,8 @@ class Company(models.Model):
     # logo_web: do not store in attachments, since the image is retrieved in SQL for
     # performance reasons (see addons/web/controllers/main.py, Binary.company_logo)
     logo_web = fields.Binary(compute='_compute_logo_web', store=True, attachment=False)
+    logo2 = fields.Binary(string="LOGO 2")
+    otec = fields.Char(string="Otec Address")
     currency_id = fields.Many2one('res.currency', string='Currency', required=True, default=lambda self: self._default_currency_id())
     user_ids = fields.Many2many('res.users', 'res_company_users_rel', 'cid', 'user_id', string='Accepted Users')
     street = fields.Char(compute='_compute_address', inverse='_inverse_street')

@@ -1557,19 +1557,4 @@ class PurchaseOrderLine(models.Model):
                 'company_id': line.company_id.id,
             })
 
-class OrderForm(models.Model):
-    _inherit = 'purchase.order'
-    attn = fields.Char()
-    soldto = fields.Char()
-    consignee = fields.Char()
-    notify = fields.Char()
-    insurance = fields.Char()
-    port_of_dest = fields.Text()
-    terms = fields.Text()
-    spl_instruction = fields.Text()
-    docs_req = fields.Text()
-    docsformillenia = fields.Text()
-    docsforcustomer = fields.Text()
-    payment_terms = fields.Text()
-    delivery_date = fields.Date()
-    remarks = fields.Text()
+

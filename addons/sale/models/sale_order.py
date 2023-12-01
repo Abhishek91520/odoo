@@ -303,10 +303,29 @@ class SaleOrder(models.Model):
     phone_number = fields.Char(string='Phone Number')
     email = fields.Char(string='Email Address')
     principal = fields.Char(string = 'Principle')
-    template_used = fields.Char(string='Template Used')
+    template_used =  fields.Selection([
+        ('millenia', 'Millenia '),
+        ('otec', 'OTEC'),
+    ], default='millenia',string='Template Used')
     additional_charges=fields.Char(string="Additional Charges")
     requirement_type = fields.Char(string="Requirement Type")
 
+
+    # orderform start here
+    attn = fields.Char()
+    soldto = fields.Char()
+    consignee = fields.Char()
+    notify = fields.Char()
+    insurance = fields.Char()
+    port_of_dest = fields.Text()
+    terms = fields.Text()
+    spl_instruction = fields.Text()
+    docs_req = fields.Text()
+    docsformillenia = fields.Text()
+    docsforcustomer = fields.Text()
+    payment_terms = fields.Text()
+    delivery_date = fields.Date()
+    remarks = fields.Text()
 
     def init(self):
         create_index(self._cr, 'sale_order_date_order_id_idx', 'sale_order', ["date_order desc", "id desc"])

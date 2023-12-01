@@ -89,7 +89,7 @@ class DemoDetails(models.Model):
     part_img_before = fields.Image("Part Image Before Process")
     part_img_after = fields.Image("Part Image After Process")
     total_hours = fields.Integer("Total Hours Required")
-    machine_use = fields.Char("Machine Use")
+    machine_use = fields.Char("Machine Used")
 
     
 
