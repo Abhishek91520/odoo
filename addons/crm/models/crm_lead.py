@@ -187,11 +187,18 @@ class Lead(models.Model):
     function = fields.Char('Job Position', compute='_compute_function', readonly=False, store=True)
     title = fields.Many2one('res.partner.title', string='Title', compute='_compute_title', readonly=False, store=True)
     email_from = fields.Char(
-        'Email', tracking=40, index='trigram',
+        'Email 1', tracking=40, index='trigram',
+        compute='_compute_email_from', inverse='_inverse_email_from', readonly=False, store=True)
+    email_from2 = fields.Char(
+        'Email 2', tracking=40, index='trigram',
         compute='_compute_email_from', inverse='_inverse_email_from', readonly=False, store=True)
     phone = fields.Char(
-        'Phone', tracking=50,
+        'Phone 1', tracking=50,
         compute='_compute_phone', inverse='_inverse_phone', readonly=False, store=True)
+    phone2 = fields.Char(
+        'Phone 2', tracking=50,
+        compute='_compute_phone', inverse='_inverse_phone', readonly=False, store=True)
+
     mobile = fields.Char('Mobile', compute='_compute_mobile', readonly=False, store=True)
     phone_state = fields.Selection([
         ('correct', 'Correct'),
@@ -224,7 +231,14 @@ class Lead(models.Model):
         'crm.zone.type', string='Zone', readonly=False, store=True)
     business_type = fields.Many2one(
         'crm.business.type', string='Business Type', readonly=False, store=True)
-    principal_name = fields.Many2one('res.partner.title', string='Principal Name', readonly=False, store=True)
+    principal_name = fields.Many2one(
+        'res.partner',
+        string='Principal Name',
+        domain=[('supplier_rank', '=', 1)],
+        readonly=False,
+        store=True
+    )
+
     industry_type = fields.Many2one('crm.industry.type', string='Industry Type', readonly=False, store=True)
     date_assigned = fields.Datetime('Assigned Date', compute='_compute_date_assigned' ,readonly=True, copy=False,store=True)
 

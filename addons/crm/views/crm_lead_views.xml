@@ -201,7 +201,7 @@
                                 <field name="principal_name"></field>
                                 <field name="zone_type"></field>
                                 <field name="business_type"></field>
-                                <field name="date_last_stage_update" readonly="False"/>
+
 
 
                                 <label for="contact_name"/>
@@ -221,11 +221,12 @@
                                         title="This email is blacklisted for mass mailings. Click to unblacklist."
                                         type="object" context="{'default_email': email_from}" groups="base.group_user"
                                         attrs="{'invisible': [('is_blacklisted', '=', False)]}"/>
-                                    <field name="email_from" id="email_from_group_lead_info" string="Email" widget="email"/>
+                                    <field name="email_from" id="email_from_group_lead_info" widget="email"/>
                                     <span class="fa fa-exclamation-triangle text-warning oe_edit_only"
                                         title="By saving this change, the customer email will also be updated."
                                         attrs="{'invisible': [('partner_email_update', '=', False)]}"/>
                                 </div>
+                                <field name="email_from2" />
                                 <field name="email_cc" groups="base.group_no_one"/>
                                 <field name="function"/>
                                 <label for="phone_group_lead_info" class="oe_inline"/>
@@ -239,6 +240,7 @@
                                         title="By saving this change, the customer phone number will also be updated."
                                         attrs="{'invisible': [('partner_phone_update', '=', False)]}"/>
                                 </div>
+                                    <field name="phone2" />
                                 <label for="mobile" class="oe_inline"/>
                                 <div class="o_row o_row_readonly">
                                     <button name="phone_action_blacklist_remove" class="fa fa-ban text-danger"
@@ -283,7 +285,6 @@
                                             groups="base.group_multi_company"
                                             options="{'no_create': True}"/>
                                         <field name="campaign_id" options="{'create_name_field': 'title', 'always_reload': True}"/>
-                                        <field name="medium_id"/>
                                         <field name="source_id"/>
                                         <field name="referred"/>
                                     </group>
@@ -370,6 +371,7 @@
                                     <field name = "initial_meeting"/>
                                     <field name = "initial_meeting_date"/>
                                     <field name = "quote_received"/>
+                                    <field name = "quote_received_date"/>
                                     <field name = "technical_evaluation"/>
                                     <field name = "offer_discussed"/>
                                     <field name = "next_step"/>
@@ -380,21 +382,19 @@
                             <page string="Politics" name="politics">
                                 <group>
                                     <group>
-                                        <field name = "contact_selection" string="Decision Maker"/>
+                                        <field name = "decision_maker" string="Decision Maker"/>
                                         <field name = "decision_criteria"/>
                                         <field name = "research_completed"/>
-                                        <field name = "competition"/>
+                                        <field name = "competition" string="Competition"/>
                                     </group>
                                     <group>
                                         <field name = "int_ext_comp" />
-                                        <field name = "contact_selection" string="Champion"/>
-                                        <field name = "contact_selection" string="Evaluator"/>
-                                        <field name = "contact_selection" string="Enemy"/>
-                                        <field name = "contact_selection" string="User"/>
+                                        <field name = "champion" string="Champion"/>
+                                        <field name = "evaluator" string="Evaluator"/>
+                                        <field name = "enemy" string="Enemy"/>
+                                        <field name = "user" string="User"/>
                                         <field name = "decision_process"/>
                                         <field name = "quotation_received"/>
-                                        <field name = "tech_discussion"/>
-                                        <field name = "offer_discount"/>
                                     </group>
 
                                 </group>
@@ -403,14 +403,13 @@
                             <page string="Demo Details" name="demo_details">
                                 <group>
                                     <field name = "sequence"/>
-                                    <field name = "customer"/>
+                                    <field name = "partner_id"/>
                                     <field name = "material"/>
                                     <field name = "hsncode"/>
                                     <field name = "media_used"/>
                                     <field name = "nda"/>
                                     <field name = "demo"/>
                                     <field name = "description"/>
-                                    <field name = "decision_criteria"/>
                                     <field name = "pic"/>
                                     <field name = "notes"/>
                                     <field name = "part_img_before"/>

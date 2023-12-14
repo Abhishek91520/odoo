@@ -1,4 +1,5 @@
-from odoo import models, fields
+from odoo import models, fields,api
+from odoo.exceptions import ValidationError
 
 
 class CrmOppBudget(models.Model):
@@ -35,39 +36,36 @@ class CrmOppBudget(models.Model):
         string='Amortization with in Month'
     )
     budget_level = fields.Text('Budget level & Source')
+
     initial_meeting = fields.Boolean('Initial Meeting')
-    initial_meeting_date = fields.Date(string='Initial Meeting Date')
+    initial_meeting_date = fields.Date(string='Initial Meeting Date', required=False)
+
+    @api.constrains('initial_meeting', 'initial_meeting_date','quote_received','quote_received_date')
+    def check_initial_meeting_date(self):
+        for record in self:
+            if record.initial_meeting and not record.initial_meeting_date or record.quote_received and not record.quote_received_date:
+                raise ValidationError("Date is mandatory when Box is checked.")
     quote_received = fields.Boolean('Quote Received')
+    quote_received_date = fields.Date(string='Quote Received Date', required=False)
     technical_evaluation = fields.Text('Technical Evaluation Completed')
     offer_discussed = fields.Boolean('Offer Discussed in Details')
-    next_step = fields.Boolean('Next Step')
+    next_step = fields.Text('Next Step')
     demo_done = fields.Boolean('Demo Done')
 
 class CrmPolitics(models.Model):
     _inherit = 'crm.lead'
-    contact_selection = fields.Selection([
-        ('contact1', 'Contact 1'),
-        ('contact2', 'Contact 2'),
-        ('contact3', 'Contact 3')],
-    )
+    decision_maker = fields.Many2one('res.partner')
     decision_criteria = fields.Text('Decision Criteria')
     research_completed = fields.Boolean('Research Completed')
-    competition = fields.Selection([
-        ('competition1', 'Competition 1'),
-        ('competition2', 'Competition 2'),
-        ('competition3', 'Competition 3')],
-        string='Competition',
-        widget="many2many_tags"
-    )
-
-
+    competition = fields.Many2one('res.partner')
+    champion = fields.Many2one('res.partner')
+    evaluator = fields.Many2one('res.partner')
+    enemy = fields.Many2one('res.partner')
+    user = fields.Many2one('res.partner')
     int_ext_comp = fields.Text('Internal & External Competition')
-
     int_support = fields.Text('Internal Support')
     decision_process = fields.Text('Decision Process')
     quotation_received = fields.Boolean('Quotation Received')
-    tech_discussion = fields.Text('Technical Discussion Evaluator')
-    offer_discount = fields.Boolean('Offer Discount in Detail')
 
 
 class DemoDetails(models.Model):
@@ -83,7 +81,6 @@ class DemoDetails(models.Model):
         string="NDA")
     demo = fields.Char("Demo")
     description = fields.Text("Description")
-    decision_criteria = fields.Text("Decision Criteria")
     pic = fields.Image("Pictures")
     notes = fields.Text("Notes")
     part_img_before = fields.Image("Part Image Before Process")
@@ -91,7 +88,7 @@ class DemoDetails(models.Model):
     total_hours = fields.Integer("Total Hours Required")
     machine_use = fields.Char("Machine Used")
 
-    
+
 
 
 
