@@ -31,5 +31,5 @@ crm_lead_pls_update_access_system,crm.lead.pls.update.access.system,model_crm_le
 crm.access_crm_lead_status,access_crm_lead_status,crm.model_crm_lead_status,base.group_user,1,1,1,1
 crm.access_crm_business_type,access_crm_business_type,crm.model_crm_business_type,base.group_user,1,1,1,1
 crm.access_crm_zone_type,access_crm_zone_type,crm.model_crm_zone_type,base.group_user,1,1,1,1
-crm.access_crm_industry_type,access_crm_industry_type,crm.model_crm_industry_type,base.group_user,1,1,1,1
+crm.access_crm_industry_type,access_crm_industry_type,crm.model_crm_industry_type,base.group_user,1,1,1,0
 access_config_settings_crm_user,Access CRM User Settings,model_res_config_settings,base.group_user,1,1,1,0
